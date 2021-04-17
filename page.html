@@ -1,0 +1,168 @@
+
+<!doctype html>
+
+<html lang="en">
+    
+<head>
+  <meta charset="utf-8">
+
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="The HTML5 Herald">
+  <meta name="author" content="SitePoint">
+
+   
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/custom-css.css">
+
+  <link rel="stylesheet" href="fontawesome/css/all.css">
+
+
+</head>
+ 
+<body id="body">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <img id="productimage"  src="img/coffee-anais.jpg" class="img-fluid product-image" alt="Responsive image">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <b><p style="font-size:1.5vw;" id="productName">Anais Reserver Lots for Expresso & Milk Coffee</p></b>
+                <p style="font-size:2vw;">AICA 2020 AWARD WINNING GOLD COFFEE</p>
+                <img src="img/aica-gold-2020-200x200.jpg" class="img-fluid product-image" alt="Responsive image">    
+                <p  style="font-size:1.5vw;">Expresso GOLD MEDAL WINNER 2020</p>
+ 
+               
+                <div style="width: 10%;">
+                    <p style="font-size: 14px; cursor: pointer;" data-toggle="tooltip" data-placement="top" title="how much would you like">
+                        <b>Size </b><i class="fas fa-exclamation-circle"></i></p>
+    
+                </div>
+               
+                <div class="container">
+                    <div class="row">
+                        <div class="radio-toolbar">
+                            <input onClick="pricechange(1)" type="radio" id="radio1" name="size" value="1kg">
+                            <label for="radio1">1kg</label>
+                        
+                            <input onClick="pricechange(2)" type="radio" id="radio2" name="size" value="2kg">
+                            <label for="radio2">2kg</label>
+                        
+                            <input onClick="pricechange(4)" type="radio" id="radio3" name="size" value="3kg">
+                            <label for="radio3">3kg</label> 
+
+                            <input onClick="pricechange(.5)" type="radio" id="radio4" name="size" value=".500g">
+                            <label for="radio4">500g</label> 
+                        </div>
+                    </div>
+                </div> 
+                <hr size="30" noshade>
+
+                <div class="container">
+                    <div class="row">
+                        <H5 style="color: red;">NZD 12.90</H5> 
+                        <p>+GST inc. GST is NZD</p>  <p id="price">14.84</p>
+                        <p hidden id="intial_price">14.84</p> 
+                    </div>             
+                </div>   
+                <div class="container">
+                    <div class="row">
+                           
+                            <button type="button" class="btn btn-default btn-number btn-sm" disabled="disabled" data-type="minus" data-field="quant[2]">
+                              <i class="fas fa-minus"></i>
+                            </button>    
+                            <input id="quantity" type="text" name="quant[2]" class="form-control input-number input-sm quantity-style" value="0" min="0" max="15">
+                            <button type="button" class="btn btn-default btn-number btn-sm" data-type="plus" data-field="quant[2]">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                            <button onClick="add()" type="button" class="btn btn-dark">ADD TO CART</button>
+                    </div>
+                         
+                </div>
+            </div>
+
+            <div id="cart" style="width: 18rem;"></div>
+
+           
+              
+            
+
+        </div>
+      </div>
+    
+  
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/custom-javascript.js"></script>
+
+     <script>
+        
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+            var x = document.getElementById("cart");
+            x.style.display = "none";
+           
+        })
+
+        function add() 
+        {
+            var quantity = $("#quantity").val();
+            
+            var size = $('input[name="size"]:checked').val();
+            
+            var ProductElement = document.getElementById("productName");
+            var product_name = ProductElement.innerText;
+
+            var priceElement = document.getElementById("price");
+            var price = priceElement.innerText;
+          
+            var product_image = document.getElementById("productimage").src;
+
+            var TotalPrice = quantity * price
+
+            
+          
+            var doc = document.getElementById("cart").innerHTML='<div class="card"><img class="card-img-top" src="'+product_image +'" alt="Card image cap"><div class="card-body"><h5 class="card-title">'+ product_name +'</h5><p class="card-text">'
+                + '<b>Price:</b>'+price
+                + '<br><b>Quantity:</b>'+quantity
+                + '<br><b>Totcal Cost:</b>'+TotalPrice+
+                '</p><button href="#" class="btn btn-primary">CheckOut</button><button href="#" class="btn btn-danger" onClick="remove()">Remove</button></div></div>';
+            var x = document.getElementById("cart");
+            x.style.display = "block";
+        }
+
+        function remove()
+        {
+             document.getElementById("cart").innerHTML=" ";
+            var x = document.getElementById("cart");
+            x.style.display = "none";
+          
+        }
+
+        function pricechange(selected)
+        {
+            var IntialpriceElement = document.getElementById("intial_price");
+            var price = IntialpriceElement.innerText;
+
+            var total=price*selected;
+
+            var priceElement = document.getElementById("price");
+            priceElement.innerText = total;
+
+            
+        }
+        
+    </script>
+</body>
+</html>
+
